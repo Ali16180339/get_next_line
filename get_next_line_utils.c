@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: agokcek <agokcek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/21 16:58:07 by agokcek           #+#    #+#             */
-/*   Updated: 2024/12/21 17:40:17 by agokcek          ###   ########.fr       */
+/*   Created: 2024/12/22 14:09:59 by agokcek           #+#    #+#             */
+/*   Updated: 2024/12/22 17:38:54 by agokcek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,53 +14,46 @@
 
 int	ft_strlen(char *s)
 {
-	int	i;
+	size_t i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while(s[i] != '\0')
 		i++;
 	return (i);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*str;
-	int		i;
-	int		j;
+	char *str;
+	size_t i;
 
-	i = -1;
-	j = 0;
-	if (!s1)
-	{
-		s1 = (char *)malloc(sizeof(char));
-		s1[0] = '\0';
-	}
-	if (!s2)
-		return (NULL);
-	str = (char *)malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
+	i = 0;
+
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
-	while (s1[++i] != '\0')
-		str[i] = s1[i];
-	while (s2[j])
-		str[i++] = s2[j++];
+	while (*s1)
+		str[i++] = *s1++;
+	while (*s2)
+		str[i++] = *s2++;
 	str[i] = '\0';
-	free(s1);
 	return (str);
 }
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i] != '\0')
+	if(!s)
+		return (NULL);
+	
+	while (*s)
 	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i++;
+		if (*s == (char)(c))
+			return ((char *)(s));
+		s++;
 	}
-	return (NULL);
+
+	if (c == '\0')
+		return (char *)s;
+	
+	return NULL;
 }

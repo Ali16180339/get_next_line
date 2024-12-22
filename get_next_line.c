@@ -6,7 +6,7 @@
 /*   By: agokcek <agokcek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 16:08:21 by agokcek           #+#    #+#             */
-/*   Updated: 2024/12/21 17:41:07 by agokcek          ###   ########.fr       */
+/*   Updated: 2024/12/22 17:39:39 by agokcek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,19 @@ static char	*after_nl(char *s, char c)
 
 	i = 0;
 	j = 0;
-	while (s[i] && s[i] != c)
-		i++;
 	if (!s[i])
 	{
 		free(s);
 		return (NULL);
 	}
+	while (s[i] && s[i] != c)
+		i++;
 	str = (char *)malloc((ft_strlen(s) - i) + 1);
 	if (!str)
+	{
+		free(s);
 		return (NULL);
+	}
 	i++;
 	while (s[i])
 		str[j++] = s[i++];
@@ -50,7 +53,10 @@ static char	*before_nl(char *s, char c)
 		i++;
 	str = (char *)malloc(sizeof(char) * (i + 2));
 	if (!str)
+	{
+		free(str);
 		return (NULL);
+	}
 	i = 0;
 	while (s[i] && s[i] != c)
 	{
