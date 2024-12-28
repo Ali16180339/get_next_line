@@ -6,13 +6,13 @@
 /*   By: agokcek <agokcek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 14:09:59 by agokcek           #+#    #+#             */
-/*   Updated: 2024/12/22 17:38:54 by agokcek          ###   ########.fr       */
+/*   Updated: 2024/12/28 17:13:56 by agokcek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t i;
 
@@ -56,4 +56,51 @@ char	*ft_strchr(const char *s, int c)
 		return (char *)s;
 	
 	return NULL;
+}
+
+char	*ft_substr(const char *s, unsigned int start, size_t len)
+{
+	size_t	j;
+	char	*str;
+	size_t	str_len;
+
+	if (!s)
+		return (NULL);
+	str_len = ft_strlen(s);
+	if (start >= str_len || len == 0)
+		return (ft_strdup(""));
+	if (len > str_len - start)
+		len = str_len - start;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	j = 0;
+	while (s[start])
+	{
+		if (j < len)
+			str[j++] = s[start];
+		start++;
+	}
+	str[j] = '\0';
+	return (str);
+}
+
+char	*ft_strdup(const char *s)
+{
+	size_t	len;
+	size_t	i;
+	char	*copy;
+
+	len = ft_strlen(s);
+	i = 0;
+	copy = (char *)malloc((len + 1) * sizeof(char));
+	if (copy == NULL)
+		return (NULL);
+	while (i < len)
+	{
+		copy[i] = s[i];
+		i++;
+	}
+	copy[len] = '\0';
+	return (copy);
 }

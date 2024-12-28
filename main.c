@@ -1,15 +1,29 @@
 #include "get_next_line.h"
-#include <fcntl.h>
 #include <stdio.h>
+#include <fcntl.h>
 
 int main()
 {
-	int  i = open("asd.txt",O_RDONLY);
+    int fd;
+    char *str;
+    fd = open("Mustafam.txt", O_RDWR, 0777);
 
-	printf("%s", get_next_line(i));
-	printf("%s", get_next_line(i));
-    printf("%s", get_next_line(i));
-    printf("%s", get_next_line(i));
-    printf("%s", get_next_line(i));
-    printf("%s", get_next_line(i));
+    str = get_next_line(fd);
+    printf("%s", str);
+    free(str);
+
+    str = get_next_line(fd);
+    printf("%s", str);
+    free(str);
+    str = get_next_line(fd);
+    printf("%s", str);
+    free(str);
+    str = get_next_line(fd);
+    printf("%s", str);
+    free(str);
+    str = get_next_line(fd);
+    printf("%s", str);
+    free(str);
+
+    close(fd);
 }
